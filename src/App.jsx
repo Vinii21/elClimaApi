@@ -1,32 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './App.css'
+import Card from './components/Card'
+import Search from './components/Search'
+import Loader from './components/Loader'
+import DarkMode from './components/DarkMode'
+import Footer from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [weather, setWeather] = useState({})
+  const [geoData, setGeoData] = useState({})
+
+  const [country, setCountry] = useState("")
+  const [loader, setLoader] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
+
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition((position)=>{
+      let lat = position.coords.latitude
+      let lon = position.coords.longitude
+      setGeoData({lat, lon})
+    }, error=>{console.log(error)})
+  },[])
+
+
+  useEffect(()=>{
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${geoData.lat}&lon=${geoData.lon}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric`)
+      .then((resp)=>{
+        setWeather(resp.data)
+        setLoader(false)
+      })
+      .catch(error=>console.log(error))
+  },[geoData])
+
+  useEffect(()=>{
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric`)
+      .then((resp)=>{
+        setWeather(resp.data)
+      })
+      .catch(error=>console.log(error))
+  },[country])
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className={darkMode ? "App dark" : "App"}>
+      {
+        loader && <Loader />
+      }
+      <header className='header'>
+        <h1>Weather app</h1>
+        <DarkMode 
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          name={weather?.name}
+        />      
+        <Search 
+          country={country}
+          setCountry={setCountry}
+        />
+      </header>
+      <Card 
+      country={weather?.sys?.country}
+      name={weather?.name}
+      wind={weather?.wind?.speed}
+      description={weather?.weather?.[0].main}
+      temp={weather?.main?.temp}
+      pressure={weather?.main?.pressure}
+      humidity={weather?.main?.humidity}
+      darkMode={darkMode}
+      />
+      <Footer />
     </div>
   )
 }

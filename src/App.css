@@ -1,42 +1,234 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root{
+  --background: radial-gradient(circle, rgba(110,213,254,1) 0%, rgba(57,142,214,1) 94%);
+  --Btn: #a1d7f5;
+  --Btn-hover: #0b7bb7;
+  --input-bg: #a7c5f7;
+  --font-color-app: #000;
+  --font-color-input: #000;
+  --shadow-color: #6caacc;
+  --icon-dark: #efce18;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.App{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--font-color-app);
+  background: var(--background);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.App.dark {
+  --background: radial-gradient(circle, rgba(83,56,143,1) 0%, rgba(47,41,88,1) 94%);
+  --Btn: #7D69F1;
+  --Btn-hover: #5b49c1;
+  --input-bg: #252930;
+  --font-color-app: #fff;
+  --font-color-input: #fff;
+  --shadow-color: #2d3e48;
+  --icon-dark: #b5c3e4;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 10px;
+}
+
+.header h1{
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.header .DarkMode__container{
+  position: absolute;
+  right: 10px;
+}
+
+.header .form{
+  margin-top: 20px;
+  width: 100%;
+}
+
+.header .form .input__container{
+  width: 100%;
+  border-radius: 20px;
+  padding: 5px;
+  display: flex;
+  background-color: var(--input-bg);
+  box-shadow: inset 0px 3px 5px 3px var(--shadow-color);
+  color: var(--font-color-input);
+}
+
+.header .form input{
+  width: 100%;
+  border: none;
+  outline: none;
+  color: var(--font-color);
+  font-family: 18px;
+  margin-left: 10px;
+  background-color: transparent;
+}
+
+.card{
+  position: relative;
+  width: 360px;
+  height: 230px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card .card__grade{
+  position: absolute;
+  left: 60px;
+  top: 30px;
+  font-size: 55px;
+  font-weight: 500;
+}
+
+.card .card__img{
+  position: absolute;
+  right: 50px;
+  top: 20px;
+  width: 120px;
+}
+
+.card .card__info{
+  position: absolute;
+  bottom: 60px;
+  left: 45px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  font-size: 13px;
+}
+
+.card .card__info li{
+  margin: 3px;
+}
+
+.card .card__country{
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.DarkMode__container{
+  width: 60px;
+  height: 30px;
+  border: 1px solid #000;
+  border-radius: 24px;
+  padding: 2px;
+  display: flex;
+  margin-top: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.DarkMode__container i{
+  position: absolute;
+  right: 0;
+  font-size: 25px;
+  color: var(--icon-dark);
+}
+
+.DarkMode__container i.left{
+  left: 0;
+}
+
+.DarkMode__container i.right{
+  right: 0;
+}
+
+.btn{
+  padding: 10px;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: var(--Btn);
+  color: var(--font-color-input);
+  width: 178px;
+  height: 38px;
+}
+
+.btn:hover{
+  background-color: var(--Btn-hover);
+}
+
+.loader{
+  width: 100%;
+  height: 100vh;
+  background-color: #3359789d;
+  backdrop-filter: blur(10px);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.loader img{
+  width: 120px;
+  animation: loader infinite 1s ease;
+}
+
+@keyframes loader {
+  0%{
+    transform: scale(1);
   }
-  to {
-    transform: rotate(360deg);
+  50%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+footer {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3px;
+}
+
+footer img{
+  width: 25px;
+  animation-name: logo;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation: logo 2s linear infinite;
+}
+
+@keyframes logo {
+  0%{
+    transform: scale(1);
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  20%{
+    transform: scale(0.9);
+  }
+  40%{
+    transform: scale(0.8);
+  }
+  80%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1.1);
+  }
 }
