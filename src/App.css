@@ -212,12 +212,10 @@
 
 footer {
   position: absolute;
-  bottom: 5px;
+  bottom: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3px;
-  margin-top: 20px;
 }
 
 footer img{
