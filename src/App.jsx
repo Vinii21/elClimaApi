@@ -9,8 +9,6 @@ import Footer from './components/Footer'
 
 function App() {
   const [weather, setWeather] = useState({})
-
-  const [country, setCountry] = useState("")
   const [loader, setLoader] = useState(true)
   const [darkMode, setDarkMode] = useState(false)
 
@@ -29,14 +27,6 @@ function App() {
     }, error=>{console.log(error)})
   },[])
 
-  useEffect(()=>{
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
-      .then((resp)=>{
-        setWeather(resp.data)
-      })
-      .catch(error=>console.log(error))
-  },[country])
-
   return (
     <div className={darkMode ? "App dark" : "App"}>
       {
@@ -50,8 +40,7 @@ function App() {
           name={weather?.name}
         />      
         <Search 
-          country={country}
-          setCountry={setCountry}
+          setWeather={setWeather}
         />
       </header>
       <Card 
