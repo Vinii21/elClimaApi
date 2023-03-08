@@ -116,6 +116,7 @@
 
 .card{
   position: relative;
+  bottom: 80px;
   width: 360px;
   height: 230px;
   background-repeat: no-repeat;
@@ -168,7 +169,7 @@
 
 .btn{
   position: relative;
-  bottom: 120px;
+  bottom: 150px;
   padding: 10px;
   border-radius: 24px;
   border: none;
