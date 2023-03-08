@@ -35,19 +35,23 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
   padding: 10px;
+  width: 100%;
 }
 
 .header h1{
   font-weight: 500;
   font-size: 30px;
+  color: #fff;
 }
 
 .header .DarkMode__container{
   position: absolute;
-  right: 10px;
+  right: 0px;
+  border: 1px solid;
 }
 
 .header .form{
@@ -81,6 +85,33 @@
   font-family: 18px;
   margin-left: 10px;
   background-color: transparent;
+}
+
+.header .DarkMode__container{
+  width: 60px;
+  height: 30px;
+  background-color: var(--Btn);
+  border-radius: 24px;
+  padding: 2px;
+  display: flex;
+  margin-top: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.header .DarkMode__container i{
+  position: absolute;
+  right: 0;
+  font-size: 25px;
+  color: var(--icon-dark);
+}
+
+.header .DarkMode__container i.left{
+  left: 0;
+}
+
+.header .DarkMode__container i.right{
+  right: 0;
 }
 
 .card{
@@ -133,33 +164,6 @@
   width: 100%;
   font-size: 18px;
   font-weight: 500;
-}
-
-.DarkMode__container{
-  width: 60px;
-  height: 30px;
-  background-color: var(--Btn);
-  border-radius: 24px;
-  padding: 2px;
-  display: flex;
-  margin-top: 5px;
-  cursor: pointer;
-  position: relative;
-}
-
-.DarkMode__container i{
-  position: absolute;
-  right: 0;
-  font-size: 25px;
-  color: var(--icon-dark);
-}
-
-.DarkMode__container i.left{
-  left: 0;
-}
-
-.DarkMode__container i.right{
-  right: 0;
 }
 
 .btn{
@@ -216,6 +220,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 footer img{
@@ -243,3 +248,78 @@ footer img{
     transform: scale(1.1);
   }
 }
+
+@media only screen and (min-width: 590px) {
+  .card{
+    width: 360px;
+    height: 250px;
+    bottom: 50px;
+    background-size: 100%;
+  }
+  
+  .card .card__grade{
+    left: 60px;
+    top: 60px;
+    font-size: 50px;
+  }
+  
+  .card .card__img{
+    right: 50px;
+    top: 20px;
+    width: 130px;
+  }
+  
+  .card .card__info{
+    bottom: 60px;
+    left: 45px;
+    font-size: 14px;
+  }
+  
+  .card .card__info li{
+    margin: 2px;
+  }
+  
+  .card .card__country{
+    bottom: 30px;
+    justify-content: space-around;
+    font-size: 20px;
+  }
+
+  .btn{
+    bottom: 100px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .header {
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: 10px;
+    padding-top: 50px;
+  }
+
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .header .form{
+    margin-top: 0px;
+    width: 500px;
+    position: relative;
+    right: 55px;
+  }
+
+  .header .form .input__container{
+    height: 40px;
+  }
+
+  .header .DarkMode__container{
+    width: 60px;
+    height: 30px;
+    background-color: var(--Btn);
+    display: flex;
+    order: 3;
+  }
+  
+}
+

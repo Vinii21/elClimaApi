@@ -25,7 +25,7 @@ function App() {
 
 
   useEffect(()=>{
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${geoData.lat}&lon=${geoData.lon}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${geoData.lat}&lon=${geoData.lon}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
       .then((resp)=>{
         setWeather(resp.data)
         setLoader(false)
@@ -34,12 +34,12 @@ function App() {
   },[geoData])
 
   useEffect(()=>{
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
       .then((resp)=>{
         setWeather(resp.data)
       })
       .catch(error=>console.log(error))
-  },[country])
+  },[setCountry])
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
