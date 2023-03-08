@@ -71,10 +71,18 @@
   color: var(--font-color-input);
 }
 
+.header .btn__input{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .header .form .input__container .bx{
   font-size: 25px;
   margin-left: 10px;
+  animation: loader infinite 1s ease;
 }
+
 
 .header .form input{
   width: 100%;
@@ -82,7 +90,6 @@
   border: none;
   outline: none;
   color: var(--font-color);
-  font-family: 18px;
   margin-left: 10px;
   background-color: transparent;
 }

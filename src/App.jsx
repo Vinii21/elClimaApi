@@ -9,7 +9,6 @@ import Footer from './components/Footer'
 
 function App() {
   const [weather, setWeather] = useState({})
-  const [geoData, setGeoData] = useState({})
 
   const [country, setCountry] = useState("")
   const [loader, setLoader] = useState(true)
@@ -17,21 +16,18 @@ function App() {
 
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
-      let lat = position.coords.latitude
-      let lon = position.coords.longitude
-      setGeoData({lat, lon})
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
+        .then((resp)=>{
+          setWeather(resp.data)
+          setLoader(false)
+        })
+        .catch(error=>console.log(error))
+
     }, error=>{console.log(error)})
   },[])
-
-
-  useEffect(()=>{
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${geoData.lat}&lon=${geoData.lon}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
-      .then((resp)=>{
-        setWeather(resp.data)
-        setLoader(false)
-      })
-      .catch(error=>console.log(error))
-  },[geoData])
 
   useEffect(()=>{
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=f9fa1d8aaf78107c7e03d2116092ba57&units=metric&lang=es`)
@@ -39,7 +35,7 @@ function App() {
         setWeather(resp.data)
       })
       .catch(error=>console.log(error))
-  },[setCountry])
+  },[country])
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
